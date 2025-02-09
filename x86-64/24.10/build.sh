@@ -32,6 +32,22 @@ EOF
 echo "cat system-core-settings"
 cat /home/build/immortalwrt/files/etc/config/system-core-settings
 
+echo "Create resolv.conf"
+mkdir -p  /home/build/immortalwrt/files/etc/config
+# 创建system配置文件 yml传入环境变量LAN_IP等 写入配置文件
+cat << EOF > /home/build/immortalwrt/files/etc/config/system-core-settings
+nameserver ${DNS_MAIN}
+nameserver 223.5.5.5
+nameserver 119.29.29.29
+nameserver 180.76.76.76
+nameserver 123.125.81.6
+nameserver 114.114.114.114
+nameserver 8.8.8.8
+EOF
+echo "cat system-core-settings"
+cat /home/build/immortalwrt/files/etc/config/system-core-settings
+
+
 
 # 输出调试信息
 echo "$(date '+%Y-%m-%d %H:%M:%S') - 开始编译..."
