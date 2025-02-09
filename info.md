@@ -2,3 +2,5 @@
 #### 固件地址 `192.168.100.1`
 #### 用户名 `root` 密码：无
 #### 默认软件包大小 2.5GB 
+
+### ImmortalWrt安装iStoreOS组件 <a href="https://wkdaily.cpolar.top/archives/1" target="_blank">https://wkdaily.cpolar.top/archives/1</a>
