@@ -80,6 +80,8 @@ jobs:
               -e ENABLE_PPPOE=${{ inputs.enable_pppoe }} \
               -e PPPOE_ACCOUNT=${{ inputs.pppoe_account }} \
               -e PPPOE_PASSWORD=${{ inputs.pppoe_password }} \
+              -e LAN_IP=${{ inputs.lan_ip }} \
+              -e GATEWAY_IP=${{ inputs.gateway_ip }} \
               immortalwrt/imagebuilder:x86-64-openwrt-24.10.0 /bin/bash /home/build/immortalwrt/build.sh
           done
 
