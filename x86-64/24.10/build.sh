@@ -21,15 +21,15 @@ echo "cat pppoe-settings"
 cat /home/build/immortalwrt/files/etc/config/pppoe-settings
 
 
-echo "Create lan-settings"
+echo "Create system-settings"
 mkdir -p  /home/build/immortalwrt/files/etc/config
-# 创建Lan网卡配置文件 yml传入环境变量LAN_IP等 写入配置文件 供99-custom.sh读取
-cat << EOF > /home/build/immortalwrt/files/etc/config/lan-settings
+# 创建system配置文件 yml传入环境变量LAN_IP等 写入配置文件 供99-custom.sh读取
+cat << EOF > /home/build/immortalwrt/files/etc/config/system-core-settings
 lan_ip=${LAN_IP}
 gateway_ip=${GATEWAY_IP}
 EOF
-echo "cat lan-settings"
-cat /home/build/immortalwrt/files/etc/config/lan-settings
+echo "cat system-core-settings"
+cat /home/build/immortalwrt/files/etc/config/system-core-settings
 
 
 # 输出调试信息
