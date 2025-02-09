@@ -30,6 +30,14 @@ on:
       pppoe_password:
         description: "宽带密码 (若启用PPPoE)"
         required: false
+      lan_ip:
+        description: "Lan内网IP (默认为192.168.1.166)"
+        required: true
+        default: "192.168.1.166"
+      gateway_ip:
+        description: "网关IP (默认为192.168.1.1)"
+        required: true
+        default: "192.168.1.1"
 
 jobs:
   build:
