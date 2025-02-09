@@ -24,6 +24,10 @@ on:
         description: "网关IP (默认为192.168.1.1)"
         required: true
         default: "192.168.1.1"
+      dns_1:
+        description: "主DNS(默认)"
+        required: true
+        default: "192.168.1.1"
       enable_pppoe:
         description: "是否配置PPPoE拨号信息?"
         required: true
@@ -82,6 +86,7 @@ jobs:
               -e PPPOE_PASSWORD=${{ inputs.pppoe_password }} \
               -e LAN_IP=${{ inputs.lan_ip }} \
               -e GATEWAY_IP=${{ inputs.gateway_ip }} \
+              -e DNS_1=${{ inputs.dns_1 }} \
               immortalwrt/imagebuilder:x86-64-openwrt-24.10.0 /bin/bash /home/build/immortalwrt/build.sh
           done
 
