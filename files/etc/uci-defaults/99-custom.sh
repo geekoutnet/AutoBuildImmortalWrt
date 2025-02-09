@@ -13,7 +13,7 @@ uci set "dhcp.@domain[-1].ip=203.107.6.88"
 
 
 # 计算网卡数量
-count=2
+count=3
 for iface in /sys/class/net/*; do
   iface_name=$(basename "$iface")
   # 检查是否为物理网卡（排除回环设备和无线设备）
@@ -38,11 +38,11 @@ if [ "$count" -eq 1 ]; then
    uci set network.lan.proto='dhcp'
 elif [ "$count" -gt 1 ]; then
    # 多网口设备 支持修改为别的ip地址
-   uci set network.lan.proto="static"
-   uci set network.lan.ipaddr="$lan_ip"
+   uci set network.lan.proto='static'
+   uci set network.lan.ipaddr=$lan_ip
    uci set network.lan.netmask='255.255.255.0'
-   uci set network.lan.gateway="$gateway_ip"
-   uci set network.lan.dns="$gateway_ip 223.5.5.5 114.114.114.114"
+   uci set network.lan.gateway=$gateway_ip
+   uci set network.lan.dns='223.5.5.5 114.114.114.114'
    echo "set $lan_ip at $(date)" >> $LOGFILE
    # 判断是否启用 PPPoE
    echo "print enable_pppoe value=== $enable_pppoe" >> $LOGFILE
