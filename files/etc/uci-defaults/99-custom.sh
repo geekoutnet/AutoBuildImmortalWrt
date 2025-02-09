@@ -58,8 +58,10 @@ elif [ "$count" -gt 1 ]; then
    uci del dhcp.lan.max_preferred_lifetime
    uci del dhcp.lan.max_valid_lifetime
    uci del dhcp.lan.dhcpv6
+   uci del network.lan.ip6assign
    uci set dhcp.lan.ignore='1'
    uci set dhcp.lan.dynamicdhcp='0'
+   uci set network.lan.delegate='0'
    # 添加默认DNS配置
    uci add_list network.lan.dns="$dns_1"
    uci add_list network.lan.dns='223.5.5.5'
