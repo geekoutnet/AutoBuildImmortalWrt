@@ -40,10 +40,10 @@ cat << EOF > /home/build/immortalwrt/files/etc/resolv.conf
 nameserver ${DNS_MAIN}
 nameserver 223.5.5.5
 nameserver 119.29.29.29
-nameserver 180.76.76.76
-nameserver 123.125.81.6
+#nameserver 180.76.76.76
+#nameserver 123.125.81.6
 nameserver 114.114.114.114
-nameserver 8.8.8.8
+#nameserver 8.8.8.8
 EOF
 echo "cat /etc/resolv.conf"
 cat /home/build/immortalwrt/files/etc/resolv.conf
