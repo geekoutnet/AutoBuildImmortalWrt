@@ -31,13 +31,13 @@ else
    . "$SETTINGS_FILE"
 fi
 
-# 检查配置文件lan-settings是否存在 该文件由build.sh动态生成
-LAN_SETTINGS_FILE="/etc/config/lan-settings"
-if [ ! -f "$LAN_SETTINGS_FILE" ]; then
-    echo "Lan settings file not found. Skipping." >> $LOGFILE
+# 检查配置文件system-settings是否存在 该文件由build.sh动态生成
+SYSTEM_SETTINGS_FILE="/etc/config/system-settings"
+if [ ! -f "$SYSTEM_SETTINGS_FILE" ]; then
+    echo "System settings file not found. Skipping." >> $LOGFILE
 else
-   # 读取Lan信息($lan_ip、$gateway_ip)
-   . "$LAN_SETTINGS_FILE"
+   # 读取System信息($lan_ip、$gateway_ip)
+   . "$SYSTEM_SETTINGS_FILE"
 fi
 
 # 网络设置 (网卡数量写死为2 走 elif 多网卡模式)
@@ -51,7 +51,21 @@ elif [ "$count" -gt 1 ]; then
    uci set network.lan.ipaddr="$lan_ip"
    uci set network.lan.netmask='255.255.255.0'
    uci set network.lan.gateway="$gateway_ip"
-   uci set network.lan.dns="$gateway_ip 223.5.5.5 114.114.114.114"
+   # 设置默认DHCP功能
+   uci del dhcp.lan.ra
+   uci del dhcp.lan.ra_slaac
+   uci del dhcp.lan.ra_flags
+   uci del dhcp.lan.max_preferred_lifetime
+   uci del dhcp.lan.max_valid_lifetime
+   uci del dhcp.lan.dhcpv6
+   uci set dhcp.lan.ignore='1'
+   uci set dhcp.lan.dynamicdhcp='0'
+   # 添加默认DNS配置
+   uci add_list network.lan.dns='223.5.5.5'
+   uci add_list network.lan.dns='114.114.114.114'
+   uci add_list network.lan.dns="$gateway_ip"
+
+   
    uci commit network
    echo "set $lan_ip at $(date)" >> $LOGFILE
    # 判断是否启用 PPPoE
