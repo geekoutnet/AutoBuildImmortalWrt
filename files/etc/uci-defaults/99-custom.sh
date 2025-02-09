@@ -66,6 +66,12 @@ elif [ "$count" -gt 1 ]; then
    uci set network.lan.peerdns='0'  # 关闭自动获取 DNS
    uci set network.lan.dns='$dns_1 223.5.5.5 8.8.8.8 114.114.114.114 8.8.4.4'
 
+   # 设置默认 DNS
+   echo "nameserver 223.5.5.5" > /etc/resolv.conf
+   echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+   echo "nameserver 114.114.114.114" >> /etc/resolv.conf
+   echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+
    uci commit network
    echo "set $lan_ip at $(date)" >> $LOGFILE
    # 判断是否启用 PPPoE
