@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       profile:
-        description: '请输入要编译固件大小 单位(MB)'
+        description: '请输入要编译固件大小 单位(MB) 默认2.5G'
         required: true
-        default: '1024'
+        default: '2560'
       include_docker:
         description: |
           是否编译 Docker 插件
@@ -16,6 +16,14 @@ on:
         options:
           - 'yes'
           - 'no'
+      lan_ip:
+        description: "Lan网卡IP (默认为192.168.1.166)"
+        required: true
+        default: "192.168.1.166"
+      gateway_ip:
+        description: "网关IP (默认为192.168.1.1)"
+        required: true
+        default: "192.168.1.1"
       enable_pppoe:
         description: "是否配置PPPoE拨号信息?"
         required: true
@@ -30,14 +38,6 @@ on:
       pppoe_password:
         description: "宽带密码 (若启用PPPoE)"
         required: false
-      lan_ip:
-        description: "Lan内网IP (默认为192.168.1.166)"
-        required: true
-        default: "192.168.1.166"
-      gateway_ip:
-        description: "网关IP (默认为192.168.1.1)"
-        required: true
-        default: "192.168.1.1"
 
 jobs:
   build:
