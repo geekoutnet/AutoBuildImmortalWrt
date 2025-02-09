@@ -6,5 +6,3 @@
 ### ImmortalWrt安装iStoreOS风格组件 <a href="https://wkdaily.cpolar.top/archives/1" target="_blank">https://wkdaily.cpolar.top/archives/1</a>
 
 ### ImmortalWrt安装MihomoTProxy组件  <a href="https://github.com/morytyann/OpenWrt-mihomo" target="_blank">https://github.com/morytyann/OpenWrt-mihomo</a> 
-
-### ImmortalWrt安装MihomoTProxy组件  <a href="https://github.com/morytyann/OpenWrt-mihomo" target="_blank">https://github.com/morytyann/OpenWrt-mihomo</a> 
