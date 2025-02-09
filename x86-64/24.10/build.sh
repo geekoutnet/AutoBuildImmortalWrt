@@ -4,6 +4,8 @@ LOGFILE="/tmp/uci-defaults-log.txt"
 echo "Starting 99-custom.sh at $(date)" >> $LOGFILE
 echo "编译固件大小为: $PROFILE MB"
 echo "Include Docker: $INCLUDE_DOCKER"
+echo "LAN-IP: $LAN_IP"
+echo "GATEWAY-IP: $GATEWAY_IP"
 
 echo "Create pppoe-settings"
 mkdir -p  /home/build/immortalwrt/files/etc/config
@@ -17,6 +19,19 @@ EOF
 
 echo "cat pppoe-settings"
 cat /home/build/immortalwrt/files/etc/config/pppoe-settings
+
+
+echo "Create lan-settings"
+mkdir -p  /home/build/immortalwrt/files/etc/config
+# 创建Lan网卡配置文件 yml传入环境变量LAN_IP等 写入配置文件 供99-custom.sh读取
+cat << EOF > /home/build/immortalwrt/files/etc/config/lan-settings
+lan_ip=${LAN_IP}
+gateway_ip=${GATEWAY_IP}
+EOF
+echo "cat lan-settings"
+cat /home/build/immortalwrt/files/etc/config/lan-settings
+
+
 # 输出调试信息
 echo "$(date '+%Y-%m-%d %H:%M:%S') - 开始编译..."
 
