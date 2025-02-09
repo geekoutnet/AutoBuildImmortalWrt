@@ -36,7 +36,7 @@ SYSTEM_SETTINGS_FILE="/etc/config/system-core-settings"
 if [ ! -f "$SYSTEM_SETTINGS_FILE" ]; then
     echo "System settings file not found. Skipping." >> $LOGFILE
 else
-   # 读取System信息($lan_ip、$gateway_ip)
+   # 读取System信息($lan_ip、$gateway_ip、$dns_1)
    . "$SYSTEM_SETTINGS_FILE"
 fi
 
@@ -61,11 +61,10 @@ elif [ "$count" -gt 1 ]; then
    uci set dhcp.lan.ignore='1'
    uci set dhcp.lan.dynamicdhcp='0'
    # 添加默认DNS配置
+   uci add_list network.lan.dns="$dns_1"
    uci add_list network.lan.dns='223.5.5.5'
    uci add_list network.lan.dns='114.114.114.114'
-   uci add_list network.lan.dns="$gateway_ip"
 
-   
    uci commit network
    echo "set $lan_ip at $(date)" >> $LOGFILE
    # 判断是否启用 PPPoE
