@@ -27,6 +27,7 @@ mkdir -p  /home/build/immortalwrt/files/etc/config
 cat << EOF > /home/build/immortalwrt/files/etc/config/system-core-settings
 lan_ip=${LAN_IP}
 gateway_ip=${GATEWAY_IP}
+dns_1=${DNS_1}
 EOF
 echo "cat system-core-settings"
 cat /home/build/immortalwrt/files/etc/config/system-core-settings
