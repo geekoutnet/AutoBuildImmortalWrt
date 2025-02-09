@@ -31,8 +31,8 @@ else
    . "$SETTINGS_FILE"
 fi
 
-# 检查配置文件system-settings是否存在 该文件由build.sh动态生成
-SYSTEM_SETTINGS_FILE="/etc/config/system-settings"
+# 检查配置文件system-core-settings是否存在 该文件由build.sh动态生成
+SYSTEM_SETTINGS_FILE="/etc/config/system-core-settings"
 if [ ! -f "$SYSTEM_SETTINGS_FILE" ]; then
     echo "System settings file not found. Skipping." >> $LOGFILE
 else
