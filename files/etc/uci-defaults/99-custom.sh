@@ -31,6 +31,15 @@ else
    . "$SETTINGS_FILE"
 fi
 
+# 检查配置文件lan-settings是否存在 该文件由build.sh动态生成
+LAN_SETTINGS_FILE="/etc/config/lan-settings"
+if [ ! -f "$LAN_SETTINGS_FILE" ]; then
+    echo "Lan settings file not found. Skipping." >> $LOGFILE
+else
+   # 读取Lan信息($lan_ip、$gateway_ip)
+   . "$LAN_SETTINGS_FILE"
+fi
+
 # 网络设置 (网卡数量写死为2 走 elif 多网卡模式)
 if [ "$count" -eq 1 ]; then
    # 单网口设备 类似于NAS模式 动态获取ip模式 具体ip地址取决于上一级路由器给它分配的ip 也方便后续你使用web页面设置旁路由
