@@ -100,10 +100,10 @@ jobs:
             echo -e "NO docker"
           fi
 
-      - name: Upload ImmortWrt as release assets
+      - name: Upload ImmortalWrt as release assets
         uses: softprops/action-gh-release@v2.2.1
         with:
-          tag_name: Autobuild-x86-64
+          tag_name: ImmortalWrt-24.10-x86-64-${{ inputs.lan_ip }}
           body_path: ${{ github.workspace }}/info.md
           files: |
             ${{ github.workspace }}/*squashfs-combined-efi.img.gz
