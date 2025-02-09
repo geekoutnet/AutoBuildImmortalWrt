@@ -36,7 +36,7 @@ SYSTEM_SETTINGS_FILE="/etc/config/system-core-settings"
 if [ ! -f "$SYSTEM_SETTINGS_FILE" ]; then
     echo "System settings file not found. Skipping." >> $LOGFILE
 else
-   # 读取System信息($lan_ip、$gateway_ip、$dns_1)
+   # 读取System信息($lan_ip、$gateway_ip、$dns_main)
    . "$SYSTEM_SETTINGS_FILE"
 fi
 
@@ -64,7 +64,7 @@ elif [ "$count" -gt 1 ]; then
    uci set network.lan.delegate='0'
    # 添加默认DNS配置
    uci set network.lan.peerdns='0'  # 关闭自动获取 DNS
-   uci set network.lan.dns='$dns_1 223.5.5.5 8.8.8.8 114.114.114.114 8.8.4.4'
+   uci set network.lan.dns='$dns_main 223.5.5.5 8.8.8.8 114.114.114.114 8.8.4.4'
 
    # 设置默认 DNS
    echo "nameserver 223.5.5.5" > /etc/resolv.conf
