@@ -13,7 +13,7 @@ uci set "dhcp.@domain[-1].ip=203.107.6.88"
 
 
 # 计算网卡数量
-count=0
+count=2
 for iface in /sys/class/net/*; do
   iface_name=$(basename "$iface")
   # 检查是否为物理网卡（排除回环设备和无线设备）
@@ -31,15 +31,19 @@ else
    . "$SETTINGS_FILE"
 fi
 
-# 网络设置
+# 网络设置 (网卡数量写死为2 走 elif 多网卡模式)
 if [ "$count" -eq 1 ]; then
    # 单网口设备 类似于NAS模式 动态获取ip模式 具体ip地址取决于上一级路由器给它分配的ip 也方便后续你使用web页面设置旁路由
    # 单网口设备 不支持修改ip 不要在此处修改ip 
    uci set network.lan.proto='dhcp'
 elif [ "$count" -gt 1 ]; then
    # 多网口设备 支持修改为别的ip地址
-   uci set network.lan.ipaddr='192.168.100.1'
-   echo "set 192.168.100.1 at $(date)" >> $LOGFILE
+   uci set network.lan.proto="static"
+   uci set network.lan.ipaddr="$lan_ip"
+   uci set network.lan.netmask='255.255.255.0'
+   uci set network.lan.gateway="$gateway_ip"
+   uci set network.lan.dns="$gateway_ip 223.5.5.5 114.114.114.114"
+   echo "set $lan_ip at $(date)" >> $LOGFILE
    # 判断是否启用 PPPoE
    echo "print enable_pppoe value=== $enable_pppoe" >> $LOGFILE
    if [ "$enable_pppoe" = "yes" ]; then
