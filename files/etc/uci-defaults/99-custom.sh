@@ -63,9 +63,8 @@ elif [ "$count" -gt 1 ]; then
    uci set dhcp.lan.dynamicdhcp='0'
    uci set network.lan.delegate='0'
    # 添加默认DNS配置
-   uci add_list network.lan.dns="$dns_1"
-   uci add_list network.lan.dns='223.5.5.5'
-   uci add_list network.lan.dns='114.114.114.114'
+   uci set network.lan.peerdns='0'  # 关闭自动获取 DNS
+   uci set network.lan.dns='$dns_1 223.5.5.5 8.8.8.8 114.114.114.114 8.8.4.4'
 
    uci commit network
    echo "set $lan_ip at $(date)" >> $LOGFILE
